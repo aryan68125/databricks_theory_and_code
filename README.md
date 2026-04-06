@@ -17,6 +17,26 @@ In Lakeflow connect, data ingestion is streamlined with simple, efficient connec
 
 Traditionally organizations are resorting to a patchwork of solutions for data ingestion when working with enterprise systems, cloud storage and streaming.
 
+### Lakeflow connect is all ingestion
+![lakeflow_connect_is_all_ingestion](images/lakeflow/lakeflow_connect_is_all_ingestion.png)
+
+With Lakeflow Connect, you can perform efficient ingestion pipelines all within Databricks.
+
+It's simple setup and maintenance providing Unified orchestration, observability and governance all within the Databricks Data intelligence platform. 
+
+### Built in connectors for data intelligence platform
+![built_in_connectors_for_data_intellgence_platform](images/lakeflow/built_in_connectors_for_data_intellgence_platform.png)
+
+Lakeflow Connect provides built-in connectors for the databricks data intelligence platform to streamline data ingestion.
+
+Key benefits include:
+- A managed and efficent solution that reduces costs and accelrates time to value.
+- Self-service interfaces that enable practitioners across the organization to easily ingest data from enterprise applications.
+- Unified observability and governance to ensure secure, reliable and well-monitored pipelines and tables.
+
+### Connectors Overview
+![connectors_overview](images/lakeflow/connectors_overview.png)
+
 Lake flow connect supports three main types of ingestion:
 - **Manual File Uploads :** This allows users to upload local files directly to databricks into either a volume or as a table, making it extremely easy to bring local data into platform quickly.
 
@@ -53,26 +73,21 @@ Common techniques for performing streaming ingestion include:
 - spark-readStream (Auto Loader with continuous trigger)
 - Declarative Pipelines (trigger mode continuous)
 
-### Lakeflow connect is all ingestion
-![lakeflow_connect_is_all_ingestion](images/lakeflow/lakeflow_connect_is_all_ingestion.png)
 
-With Lakeflow Connect, you can perform efficient ingestion pipelines all within Databricks.
+## DeltaLake 
+DeltaLake delivers open, reliable and scalable data management for the lakehouse, empowering you to ingest data from external sources and efficiently manage it across Bronze (raw),  Silver (cleaned), Gold (curated) layers - all with full **ACID** transactions -> (**A**tomicity, **C**onsistency, **I**solation, and **D**urability) 
 
-It's simple setup and maintenance providing Unified orchestration, observability and governance all within the Databricks Data intelligence platform. 
+### Ingesting data into delta lake 
+![data_ingestion_deltaLake](images/delta_lake/data_ingestion_deltaLake.png)
 
-### Built in connectors for data intelligence platform
-![built_in_connectors_for_data_intellgence_platform](images/lakeflow/built_in_connectors_for_data_intellgence_platform.png)
+The goal is to ingest files from external data sources like cloud object storage into DeltaLake as Delta tables. Remember, Delta Lake is simply and open-source protocol for reading and writing files and to cloud storage. Delta tables often an open table format that supports the Lakehouse architecture. 
 
-Lakeflow Connect provides built-in connectors for the databricks data intelligence platform to streamline data ingestion.
+### Delta table components: 
+![delta_table_components](images/delta_lake/delta_table_components.png)
+![delta_lake_architecture](images/delta_lake/delta_lake_architecture.svg)
 
-Key benefits include:
-- A managed and efficent solution that reduces costs and accelrates time to value.
-- Self-service interfaces that enable practitioners across the organization to easily ingest data from enterprise applications.
-- Unified observability and governance to ensure secure, reliable and well-monitored pipelines and tables.
+Under the hood delta table store data within a folder directory, data is stored as parquet files and what delta adds is delta logs stored as JSON files alongside the parquet files. The delta logs keep track of all the transactions on data (parquet files) and table versions. 
 
-### Connectors Overview
-![connectors_overview](images/lakeflow/connectors_overview.png)
+The transaction logs provide a wide array of functionality to the delta table. With the transaction log, we have the concept of table states, so if you insert, delete or update data in your table, Delta basically adds a transaction (the log file) and your table stays updated and managed. So with the transaction log you are able to easily get consistent views of your data and you are actually able to travel back in time.
 
-It supports three main types of ingestion:
-- **Manual File Uploads :** This allows users to upload local files directly to Databricks into either a volume or as a table, making it extremely easy to bring local data into the platform quickly.
-- **Standard Connectors :** These connectors support data ingestion from various sources such as cloud object storage, kafka and more. They support multiple ingestion modes, including 
+
