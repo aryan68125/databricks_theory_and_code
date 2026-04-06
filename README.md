@@ -90,4 +90,11 @@ Under the hood delta table store data within a folder directory, data is stored 
 
 The transaction logs provide a wide array of functionality to the delta table. With the transaction log, we have the concept of table states, so if you insert, delete or update data in your table, Delta basically adds a transaction (the log file) and your table stays updated and managed. So with the transaction log you are able to easily get consistent views of your data and you are actually able to travel back in time.
 
+### Delta table key features 
+![Delta_table_key_features](images/delta_lake/Delta_table_key_features.png)
+Delta tables provide a variety of key features in a cloud data lake. 
+- **ACID** transactions (**A**tomicity, **C**consistency, **I**solation and **D**urability) for all operations, allowing multiple users to read and write data concurrently without conflicts.
+- Supports **D**ata **M**anipulation **L**anguage (DML) operations such as ```INSERT```, ```UPDATE```, and ```MERGE``` enabling flexible data management. 
+- Time travel allows users to query and revert to previous versions of data facilitating auditing and recovery.
+- Enforces a defined schema for data integrity while allowing schema evolution, enabling changes to the structure without breaking existing workflows. 
 
