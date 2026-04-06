@@ -17,6 +17,42 @@ In Lakeflow connect, data ingestion is streamlined with simple, efficient connec
 
 Traditionally organizations are resorting to a patchwork of solutions for data ingestion when working with enterprise systems, cloud storage and streaming.
 
+Lake flow connect supports three main types of ingestion:
+- **Manual File Uploads :** This allows users to upload local files directly to databricks into either a volume or as a table, making it extremely easy to bring local data into platform quickly.
+
+- **Standard Connectors :** These connectors support data ingestion from various sources such as cloud object storage,kafka and more. They support multiple ingestion modes, including batch , incremental batch and streaming. We will explore these ingestion methods in more detail shorltly.
+
+- **Managed Connectors :** Purpose built for ingesting data from enterpirse applications, including Saas platforms and databases. They leverage efficienrt incremental read/write patterns to provide scalable cost-effective and high performance data ingestion into the lake house.
+
+#### Batch ingestion : 
+![batch_ingestion](images/lakeflow/batch_ingestion.png)
+Batch ingestion loads data as batches of rows into databricks, often based on a schedule.
+
+Traditional batch ingestion processes all records each time it runs. Common techniques for performing batch ingestion include.
+- **The sql statement :** ```CREATE TABLE AS SELECT```
+- **The python method :** ```spark.read.load()```
+
+#### Incremental batch ingestion :
+![incremental_batch_ingestion](images/lakeflow/incremental_batch_ingestion.png)
+While traditional batch ingestion processes all the records everytime it runs. Incremental batch ingestion automatically detects new records in the data source and skips records that have already been ingested. This means only new data is ingested.
+
+Incremental batch ingestion is faster and more resource efficient because it processes only new records instead of reprocessing the entire data source.
+
+Common techniques for performing incremental batch ingestion include : 
+- SQL statement : ```COPY INTO```
+- The python method : ```spark.readStream(Auto Loader with a time trigger)```
+- Declarative Pipelines : ```CREATE OR REFRESH STREAMING TABLE```
+
+#### Streaming Table
+![streaming_table](images/lakeflow/streaming_table.png)
+With streaming ingestion, data is continuously loaded as it is generated, allowing you to query it in near real-time. This method is ideal for loading streaming data from sources such as Apache Kafka, Apache Pulsar, AWS Kinesis, Google Pub/Sub.
+
+Streaming ingestion processes data as it arrives, enabling low-latency analysis and immediate action. It contrasts micro-batch ingestion collects data over short frequent intervals (Seconds or minutes) and processing it in small batches. This strikes a balance between latency and system efficiency.
+
+Common techniques for performing streaming ingestion include:
+- spark-readStream (Auto Loader with continuous trigger)
+- Declarative Pipelines (trigger mode continuous)
+
 ### Lakeflow connect is all ingestion
 ![lakeflow_connect_is_all_ingestion](images/lakeflow/lakeflow_connect_is_all_ingestion.png)
 
